@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en" style="color: rgb(0, 0, 0);">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Google-Style-Login-.css">
+</head>
+
+<body style="margin-top: 87px;padding-top: 0px;background: linear-gradient(black, rgb(15,15,15) 3%, white);">
+    <!-- Start: Google Style Login -->
+    <div class="login-card" style="margin-bottom: 238px;margin-top: 87px;"><img class="profile-img-card"
+            src="assets/img/avatar_2x.png">
+        <p class="profile-name-card"> </p>
+        <form id="signupForm" class="form-signin">
+            <input class="form-control" type="text" id="fname" required="" placeholder="First Name">
+            <input class="form-control" type="text" id="lname" required="" placeholder="Last Name">
+            <input class="form-control" type="date" id="dob" required="" placeholder="Date of birth">
+            <input class="form-control" type="text" id="address" required="" placeholder="Address">
+            <input class="form-control" type="text" id="phone" required="" placeholder="Phone">
+            <input class="form-control" type="email" id="inputEmail" required="" placeholder="Email address" autofocus="">
+            <input class="form-control" type="password" id="inputPassword" required="" placeholder="Password">
+            <div class="checkbox"></div>
+            <button class="btn btn-primary btn-lg d-block btn-signin w-100" type="submit"
+                style="border-color: var(--bs-red);background: rgb(188,79,72);">Sign in</button>
+        </form><a class="forgot-password" href="..\index.html" style="color: rgb(222,101,93);">Already have an
+            account?Sign in</a>
+    </div><!-- End: Google Style Login -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('signupForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const fname= document.getElementById('fname').value;
+            const lname= document.getElementById('lname').value;
+            const dob= document.getElementById('dob').value;
+            const address= document.getElementById('address').value;
+            const phone= document.getElementById('phone').value;
+            const inputEmail= document.getElementById('inputEmail').value;
+            const inputPassword= document.getElementById('inputPassword').value;
+            console.log(fname, lname, dob, address, phone, inputEmail, inputPassword); // Add this line to check the form data being sent
+
+            const formData = {
+                fname,
+                lname,
+                dob,
+                address,
+                phone,
+                inputEmail,
+                inputPassword
+            };
+            fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+
+</html>
